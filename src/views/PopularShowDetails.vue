@@ -5,7 +5,7 @@
         <b-col cols="12" md="5" xl="3">
           <b-img class="show-image" rounded :src="show.image.original"></b-img>
         </b-col>
-        <b-col cols="12" md="7" xl="5">
+        <b-col cols="12" md="7" xl="3">
           <div class="show__detail">
             <h1>
               <b>{{ show.name }}</b> ({{ show.premiered.substring(0, 4) }})
@@ -17,7 +17,7 @@
               <b>Runtime: </b> {{ show.runtime }} minutes<br />
               <b>Status: </b> {{ show.status }}<br />
               <b>Rating: </b> {{ show.rating.average }}<br />
-              <a :href="show.officialSite">Official Site</a>
+              <a v-if="show.officialSite" :href="show.officialSite">Official Site</a>
               <p
                 class="show__detail--details--summary"
                 v-html="show.summary"
@@ -45,9 +45,12 @@ export default {
      * Fetches data about show
      */
     getShowDetailsData() {
+      this.$emit('loading', true);
+
       axios
         .get("http://api.tvmaze.com/shows/" + this.$route.params.id)
         .then(response => {
+          this.$emit('loading', false);
           this.show = response.data;
         });
     }

@@ -1,19 +1,32 @@
 <template>
   <div id="app">
+    <Spinner v-if="loading" />
     <Header />
     <b-container class="content" fluid>
-      <router-view />
+      <router-view v-on:loading="isLoading" />
     </b-container>
   </div>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
+import Spinner from "./components/Spinner.vue";
 
 export default {
   name: "App",
   components: {
-    Header
+    Header,
+    Spinner
+  },
+  data() {
+    return {
+      loading: false
+    }
+  },
+  methods: {
+    isLoading(value) {
+      this.loading = value;
+    }
   }
 };
 </script>

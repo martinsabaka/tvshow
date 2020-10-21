@@ -70,7 +70,7 @@ import ShowDetail from "../components/ShowDetail";
 export default {
   name: "PopularShows",
   components: {
-    ShowDetail
+    ShowDetail,
   },
   data() {
     return {
@@ -89,7 +89,10 @@ export default {
      * Fetches data about shows
      */
     getShowData() {
+      this.$emit('loading', true);
+      
       axios.get("http://api.tvmaze.com/shows").then(response => {
+        this.$emit('loading', false);
         this.shows = response.data;
       });
     },
