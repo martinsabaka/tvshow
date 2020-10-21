@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import Header from './components/Header.vue';
+import Header from "./components/Header.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Header,
+    Header
   }
-}
+};
 </script>
 
 <style>
