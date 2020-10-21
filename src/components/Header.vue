@@ -15,9 +15,9 @@
           <b-button
             size="sm"
             class="my-2 my-sm-0"
-            v-on:click="searchShow(showSearchInput)"
-            >Search</b-button
-          >
+            v-on:click="searchShow(showSearchInput)">
+            Search
+          </b-button>
         </b-nav-form>
       </b-navbar-nav>
     </b-navbar>
@@ -36,11 +36,9 @@ export default {
   },
   methods: {
     searchShow(input) {
-      console.log(input);
       axios
         .get("http://api.tvmaze.com/singlesearch/shows?q=" + input)
         .then(response => {
-          console.log(response);
           this.$router.push("/detail/" + response.data.id);
         });
     }

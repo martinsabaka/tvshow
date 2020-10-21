@@ -57,7 +57,11 @@ export default {
   },
   mounted() {
     this.getShowDetailsData();
-  }
+  },
+  beforeRouteUpdate(to) {
+    this.$route.params.id = to.params.id;
+    this.getShowDetailsData();
+  },
 };
 </script>
 
