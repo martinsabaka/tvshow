@@ -1,0 +1,78 @@
+<template>
+  <div>
+    <b-container fluid>
+      <b-row class="show" v-if="show.image">
+        <b-col cols="12" md="5" xl="3">
+          <b-img class="show-image" rounded :src="show.image.original"></b-img>
+        </b-col>
+        <b-col cols="12" md="7" xl="5">      
+          <div class="show__detail">
+            <h1><b>{{ show.name }}</b> ({{ show.premiered.substring(0, 4) }})</h1>
+            <i>{{ show.genres.toString() }}</i><br />
+            <div class="show__detail--details">
+              <b>Language: </b> {{ show.language }}<br />
+              <b>Runtime: </b> {{ show.runtime }} minutes<br />
+              <b>Status: </b> {{ show.status }}<br />     
+              <b>Rating: </b> {{ show.rating.average }}<br />   
+              <a :href="show.officialSite">Official Site</a>  
+              <p class="show__detail--details--summary" v-html="show.summary"></p>    
+            </div>     
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  name: 'PopularShowDetails',
+  data() {
+    return {
+      show: {}
+    }
+  },
+  methods: {
+    /**
+     * Fetches data about show
+     */
+    getShowDetailsData() {
+      axios
+        .get('http://api.tvmaze.com/shows/' + this.$route.params.id)
+        .then(response => {
+          this.show = response.data;
+        });
+    }
+  },
+  mounted() {
+    this.getShowDetailsData();
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .show-image {
+    width: 100%;
+  }
+
+  .show {
+    justify-content: center;
+    
+    &__detail {
+      h1 {
+        text-transform: uppercase;
+      }
+
+      &--details {
+        padding-top: 2rem;
+
+        &--summary {
+          padding-top: 2rem;
+        }
+      }
+    }
+  }
+
+</style>

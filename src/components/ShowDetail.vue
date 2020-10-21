@@ -1,16 +1,18 @@
 <template>
-  <div>
-    <b-img class="shows-list--thumbnail" rounded :src="show.image.medium"></b-img>
-    <div class="shows-list__detail">
-      <b class="shows-list__detail--title">{{ show.name }}</b>
-      {{ show.genres.toString() }}<br />
-      {{ show.premiered }}<br />
-      {{ show.rating.average }}
+  <router-link :to="`/detail/${show.id}`">
+    <div class="show-item">
+      <b-img class="show-item--thumbnail" rounded :src="show.image.medium"></b-img>
+      <div class="show-item__detail">
+        <b class="show-item__detail--title">{{ show.name }}</b>
+        {{ show.genres.toString() }}<br />
+        {{ show.premiered.substring(0, 4) }}<br />
+        {{ show.rating.average }}
+      </div>
+      <div class="show-item--title">
+        {{ show.name }}
+      </div>
     </div>
-    <div class="shows-list--title">
-      {{ show.name }}
-    </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -21,18 +23,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .shows-list {
-    flex-wrap: wrap;
+  a {
+    color: black;
+  }
 
+  .show-item {
     &--thumbnail {
-      object-fit: cover;
+      object-fit: cover;     
+    }
 
-      &:hover {
-        filter: brightness(40%);
-      }
+    &--thumbnail:hover {
+      filter: brightness(40%);
     }
 
     &__detail {
+      pointer-events : none;
       display: none;
       position: absolute;
       left: 2rem;

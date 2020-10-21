@@ -1,21 +1,19 @@
 <template>
   <div id="app">
     <Header />
-    <b-container fluid>
-      <PopularShows />
+    <b-container class="content" fluid>
+      <router-view />
     </b-container>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue';
-import PopularShows from './pages/PopularShows.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
-    PopularShows,
   }
 }
 </script>
@@ -23,6 +21,10 @@ export default {
 <style>
 * {
   margin: 0px !important;
+}
+
+.content {
+  padding-top: 2rem;
 }
 
 #app {
