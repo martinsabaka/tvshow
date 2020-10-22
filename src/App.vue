@@ -3,7 +3,7 @@
     <Spinner v-if="loading" />
     <Header />
     <b-container class="content" fluid>
-      <router-view v-on:loading="isLoading" />
+      <router-view />
     </b-container>
   </div>
 </template>
@@ -11,6 +11,7 @@
 <script>
 import Header from "./components/Header.vue";
 import Spinner from "./components/Spinner.vue";
+import Bus from "./eventBus";
 
 export default {
   name: "App",
@@ -21,12 +22,12 @@ export default {
   data() {
     return {
       loading: false
-    }
+    };
   },
-  methods: {
-    isLoading(value) {
-      this.loading = value;
-    }
+  updated() {
+    Bus.$on("toggleSpinner", isLoading => {
+      this.loading = isLoading;
+    });
   }
 };
 </script>

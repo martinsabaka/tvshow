@@ -7,8 +7,9 @@
             class="m-1"
             v-on:click="setFilter('All')"
             :class="{ selected: filter === 'All' }"
-            >All Genres</b-button
           >
+            All Genres
+          </b-button>
           <b-button
             class="m-1"
             v-on:click="setFilter('Drama')"
@@ -45,7 +46,10 @@
             :class="{ selected: filter === 'Crime' }"
             >Crime</b-button
           >
-          <b-button class="m-1" v-on:click="filterShowsRating()"
+          <b-button
+            class="m-1"
+            v-on:click="filterShowsGenre(!sortByRating)"
+            :class="{ selected: sortByRating }"
             >Show best</b-button
           >
         </b-button-group>
@@ -54,7 +58,7 @@
     <b-list-group class="shows-list" horizontal>
       <b-list-group-item
         class="shows-list__item"
-        v-for="show in filterShowsGenre(filter).slice(0, 21)"
+        v-for="show in filterShowsGenre(sortByRating).slice(0, 21)"
         :key="show.id"
       >
         <ShowDetail v-bind:show="show" />
@@ -70,7 +74,7 @@ import ShowDetail from "../components/ShowDetail";
 export default {
   name: "PopularShows",
   components: {
-    ShowDetail,
+    ShowDetail
   },
   data() {
     return {
@@ -81,7 +85,8 @@ export default {
         { key: "rating" }
       ],
       shows: [],
-      filter: "All"
+      filter: "All",
+      sortByRating: false
     };
   },
   methods: {
@@ -89,10 +94,10 @@ export default {
      * Fetches data about shows
      */
     getShowData() {
-      this.$emit('loading', true);
-      
+      this.$emit("loading", true);
+
       axios.get("http://api.tvmaze.com/shows").then(response => {
-        this.$emit('loading', false);
+        this.$emit("loading", false);
         this.shows = response.data;
       });
     },
@@ -107,21 +112,30 @@ export default {
     /**
      * Filters shows based on genre
      */
-    filterShowsGenre() {
+    filterShowsGenre(sortByRating) {
+      let filteredShows;
+      this.sortByRating = sortByRating;
+
       if (this.filter === "All") {
-        return this.shows;
+        filteredShows = this.shows.filter(show => {
+          return show;
+        });
+      } else {
+        filteredShows = this.shows.filter(show => {
+          return show.genres.includes(this.filter);
+        });
       }
 
-      return this.shows.filter(show => {
-        return show.genres.includes(this.filter);
-      });
+      return this.sortByRating
+        ? this.filterShowsRating(filteredShows)
+        : filteredShows;
     },
 
     /**
      * Filters by show rating
      */
-    filterShowsRating() {
-      return this.shows.sort(
+    filterShowsRating(shows) {
+      return shows.sort(
         (a, b) => parseFloat(b.rating.average) - parseFloat(a.rating.average)
       );
     }

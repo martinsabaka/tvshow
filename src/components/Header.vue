@@ -15,7 +15,8 @@
           <b-button
             size="sm"
             class="my-2 my-sm-0"
-            v-on:click="searchShow(showSearchInput)">
+            v-on:click="searchShow(showSearchInput)"
+          >
             Search
           </b-button>
         </b-nav-form>

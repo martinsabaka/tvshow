@@ -43,6 +43,7 @@ a {
   &__detail {
     pointer-events: none;
     display: none;
+    padding-right: 1rem;
     position: absolute;
     left: 2rem;
     top: 2rem;

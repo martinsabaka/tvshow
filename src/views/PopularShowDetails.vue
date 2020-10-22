@@ -17,7 +17,9 @@
               <b>Runtime: </b> {{ show.runtime }} minutes<br />
               <b>Status: </b> {{ show.status }}<br />
               <b>Rating: </b> {{ show.rating.average }}<br />
-              <a v-if="show.officialSite" :href="show.officialSite">Official Site</a>
+              <a v-if="show.officialSite" :href="show.officialSite"
+                >Official Site</a
+              >
               <p
                 class="show__detail--details--summary"
                 v-html="show.summary"
@@ -26,6 +28,9 @@
           </div>
         </b-col>
       </b-row>
+      <div class="show__go-back">
+        <b-button to="/">Go to shows list</b-button>
+      </div>
     </b-container>
   </div>
 </template>
@@ -45,12 +50,11 @@ export default {
      * Fetches data about show
      */
     getShowDetailsData() {
-      this.$emit('loading', true);
+      this.$emit("loading", true);
 
       axios
         .get("http://api.tvmaze.com/shows/" + this.$route.params.id)
         .then(response => {
-          this.$emit('loading', false);
           this.show = response.data;
         });
     }
@@ -61,7 +65,7 @@ export default {
   beforeRouteUpdate(to) {
     this.$route.params.id = to.params.id;
     this.getShowDetailsData();
-  },
+  }
 };
 </script>
 
@@ -85,6 +89,11 @@ export default {
         padding-top: 2rem;
       }
     }
+  }
+
+  &__go-back {
+    padding-top: 2rem;
+    text-align: center;
   }
 }
 </style>
