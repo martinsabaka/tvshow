@@ -2,6 +2,7 @@
   <router-link :to="`/detail/${show.id}`">
     <div class="show-item">
       <b-img
+        v-if="show.image"
         class="show-item--thumbnail"
         rounded
         :src="show.image.medium"
