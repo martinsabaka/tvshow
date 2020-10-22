@@ -29,7 +29,7 @@
         </b-col>
       </b-row>
       <div class="show__go-back">
-        <b-button to="/">Go to shows list</b-button>
+        <b-button to="/" variant="info">Go to shows list</b-button>
       </div>
     </b-container>
   </div>

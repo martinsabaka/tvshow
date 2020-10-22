@@ -46,11 +46,12 @@
             :class="{ selected: filter === 'Crime' }"
             >Crime</b-button
           >
-          <b-button
-            class="m-1 filter-buttons__group--sort-btn"
-            v-on:click="filterShowsGenre(!sortByRating)"
-            :class="{ selected: sortByRating }"
-            >Show best</b-button
+          <b-button 
+            class="m-1 ml-5 filter-buttons__group--sort-btn"
+            variant="outline-info" 
+            v-on:click="filterShowsGenre(!sortByRating)" 
+            :class="{ sorted: sortByRating }"
+            >{{ sortByRating ? 'Show random shows' : 'Show best rated' }}</b-button
           >
         </b-button-group>
       </b-row>
@@ -68,82 +69,80 @@
 </template>
 
 <script>
-import axios from "axios";
-import ShowDetail from "../components/ShowDetail";
+  import axios from "axios";
+  import ShowDetail from "../components/ShowDetail";
 
-export default {
-  name: "PopularShows",
-  components: {
-    ShowDetail
-  },
-  data() {
-    return {
-      fields: [
-        { key: "name" },
-        { key: "genres" },
-        { key: "language" },
-        { key: "rating" }
-      ],
-      shows: [],
-      filter: "All",
-      sortByRating: false
-    };
-  },
-  methods: {
-    /**
-     * Fetches data about shows
-     */
-    getShowData() {
-      this.$emit("loading", true);
-
-      axios.get("http://api.tvmaze.com/shows").then(response => {
-        this.$emit("loading", false);
-        this.shows = response.data;
-      });
+  export default {
+    name: "PopularShows",
+    components: {
+      ShowDetail
     },
-
-    /**
-     * Sets currently used filter
-     */
-    setFilter(filter) {
-      this.filter = filter;
+    data() {
+      return {
+        fields: [
+          { key: "name" },
+          { key: "genres" },
+          { key: "language" },
+          { key: "rating" }
+        ],
+        shows: [],
+        filter: "All",
+        sortByRating: false
+      };
     },
+    methods: {
+      /**
+       * Fetches data about shows
+       */
+      getShowData() {
+        this.$emit("loading", true);
 
-    /**
-     * Filters shows based on genre
-     */
-    filterShowsGenre(sortByRating) {
-      let filteredShows;
-      this.sortByRating = sortByRating;
+        axios.get("http://api.tvmaze.com/shows").then(response => {
+          this.$emit("loading", false);
+          this.shows = response.data;
+        });
+      },
 
-      if (this.filter === "All") {
-        filteredShows = this.shows.filter(show => {
-          return show;
-        });
-      } else {
-        filteredShows = this.shows.filter(show => {
-          return show.genres.includes(this.filter);
-        });
+      /**
+       * Sets currently used filter
+       */
+      setFilter(filter) {
+        this.filter = filter;
+      },
+
+      /**
+       * Filters shows based on genre
+       */
+      filterShowsGenre(sortByRating) {
+        let filteredShows;
+        this.sortByRating = sortByRating;
+
+        if (this.filter === "All") {
+          filteredShows = this.shows.filter(show => {
+            return show;
+          });
+        } else {
+          filteredShows = this.shows.filter(show => {
+            return show.genres.includes(this.filter);
+          });
+        }
+
+        return this.sortByRating ? this.filterShowsRating(filteredShows) : filteredShows; 
+      },
+
+      /**
+       * Filters by show rating
+       */
+      filterShowsRating(shows) {
+        return shows.sort(
+          (a, b) => parseFloat(b.rating.average) - parseFloat(a.rating.average)
+        );
       }
-
-      return this.sortByRating
-        ? this.filterShowsRating(filteredShows)
-        : filteredShows;
     },
-
-    /**
-     * Filters by show rating
-     */
-    filterShowsRating(shows) {
-      return shows.sort(
-        (a, b) => parseFloat(b.rating.average) - parseFloat(a.rating.average)
-      );
+    mounted() {
+      this.getShowData();
     }
-  },
-  mounted() {
-    this.getShowData();
-  }
-};
+  };
 </script>
 
 <style lang="scss" scoped>
@@ -163,9 +162,15 @@ export default {
     background-color: #343a40;
   }
 
+  .sorted {
+    color: white;
+    background-color: #17a2b8;
+  }
+
   &__group {
     &--sort-btn {
-      background-color: red;
+      margin-left: 2rem;
+      width: 12rem;
     }
   }
 
