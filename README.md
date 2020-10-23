@@ -11,8 +11,8 @@ Vue CLI version `4.5.8`
 Application consists of Views and Components.
 
 Namming conventions:
-Views/Components - CamelCase
-Methods - lower camelCase
+Views/Components - CamelCase,
+Methods - lower camelCase,
 Test .js file names - lower camelCase
 
 ## Project setup
