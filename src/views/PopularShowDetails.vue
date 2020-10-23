@@ -10,8 +10,8 @@
             <h1>
               <b>{{ show.name }}</b> ({{ show.premiered.substring(0, 4) }})
             </h1>
-            <i>{{ show.genres.toString() }}</i
-            ><br />
+            <i>{{ show.genres.toString() }}</i>
+            <br />
             <div class="show__detail--details">
               <b>Language: </b> {{ show.language }}<br />
               <b>Runtime: </b> {{ show.runtime }} minutes<br />
@@ -93,6 +93,10 @@ export default {
 
     &--details {
       padding-top: 2rem;
+
+      a:hover {
+        text-decoration: none;
+      }
 
       &--imdb-icon {
         width: 50px;
