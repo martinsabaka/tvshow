@@ -15,7 +15,7 @@
           <b-button
             size="sm"
             class="my-2 my-sm-0"
-            v-on:click="searchShow(showSearchInput)"
+            @click="searchShow(showSearchInput)"
           >
             Search
           </b-button>
@@ -36,6 +36,9 @@ export default {
     };
   },
   methods: {
+    /**
+     * Searches show based on shows name
+     */
     searchShow(input) {
       axios
         .get("http://api.tvmaze.com/singlesearch/shows?q=" + input)

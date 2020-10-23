@@ -4,52 +4,18 @@
       <b-row class="filter-buttons">
         <b-button-group class="filter-buttons__group">
           <b-button
+            v-for="(genre, index) in genres"
+            :key="index"
             class="m-1"
-            v-on:click="setFilter('All')"
-            :class="{ selected: filter === 'All' }"
+            @click="setFilter(genre)"
+            :class="{ selected: filter === genre }"
           >
-            All Genres
+            {{ genre }}
           </b-button>
-          <b-button
-            class="m-1"
-            v-on:click="setFilter('Drama')"
-            :class="{ selected: filter === 'Drama' }"
-            >Drama</b-button
-          >
-          <b-button
-            class="m-1"
-            v-on:click="setFilter('Romance')"
-            :class="{ selected: filter === 'Romance' }"
-            >Romance</b-button
-          >
-          <b-button
-            class="m-1"
-            v-on:click="setFilter('Action')"
-            :class="{ selected: filter === 'Action' }"
-            >Action</b-button
-          >
-          <b-button
-            class="m-1"
-            v-on:click="setFilter('Thriller')"
-            :class="{ selected: filter === 'Thriller' }"
-            >Thriller</b-button
-          >
-          <b-button
-            class="m-1"
-            v-on:click="setFilter('Science-Fiction')"
-            :class="{ selected: filter === 'Science-Fiction' }"
-            >Science-Fiction</b-button
-          >
-          <b-button
-            class="m-1"
-            v-on:click="setFilter('Crime')"
-            :class="{ selected: filter === 'Crime' }"
-            >Crime</b-button
-          >
           <b-button
             class="m-1 ml-5 filter-buttons__group--sort-btn"
             variant="outline-info"
-            v-on:click="filterShowsGenre(!sortByRating)"
+            @click="filterShowsGenre(!sortByRating)"
             :class="{ sorted: sortByRating }"
             >{{
               sortByRating ? "Show random shows" : "Show best rated"
@@ -64,7 +30,7 @@
         v-for="show in filterShowsGenre(sortByRating).slice(0, 21)"
         :key="show.id"
       >
-        <ShowDetail v-bind:show="show" />
+        <ShowDetail :show="show" />
       </b-list-group-item>
     </b-list-group>
   </div>
@@ -86,6 +52,18 @@ export default {
         { key: "genres" },
         { key: "language" },
         { key: "rating" }
+      ],
+      genres: [
+        "All",
+        "Action",
+        "Anime",
+        "Crime",
+        "Drama",
+        "Horror",
+        "Romance",
+        "Science-Fiction",
+        "Thriller",
+        "Western"
       ],
       shows: [],
       filter: "All",
