@@ -17,9 +17,18 @@
               <b>Runtime: </b> {{ show.runtime }} minutes<br />
               <b>Status: </b> {{ show.status }}<br />
               <b>Rating: </b> {{ show.rating.average }}<br />
-              <a v-if="show.officialSite" :href="show.officialSite"
-                >Official Site</a
+              <a
+                v-if="show.externals.imdb"
+                :href="'https://www.imdb.com/title/' + show.externals.imdb"
               >
+                <img
+                  class="show__detail--details--imdb-icon"
+                  src="@/assets/imdb-icon.jpg"
+                />
+              </a>
+              <a v-if="show.officialSite" :href="show.officialSite">
+                Official Site
+              </a>
               <p
                 class="show__detail--details--summary"
                 v-html="show.summary"
@@ -84,6 +93,10 @@ export default {
 
     &--details {
       padding-top: 2rem;
+
+      &--imdb-icon {
+        width: 50px;
+      }
 
       &--summary {
         padding-top: 2rem;

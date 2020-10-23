@@ -8,12 +8,14 @@ User can also search for TV show based on show's name.
 Vue version `2.6.11`
 Vue CLI version `4.5.8`
 
-Application consists of Views and Components.
+Application consists of Views and Components. Jest Unit test are in `__tests__` folder.
 
 Namming conventions:
 Views/Components - CamelCase,
 Methods - lower camelCase,
 Test .js file names - lower camelCase
+
+Lint was set to Standard
 
 ## Project setup
 

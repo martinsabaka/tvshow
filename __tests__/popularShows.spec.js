@@ -26,6 +26,11 @@ describe('PopularShows.vue', () => {
     expect(wrapper).toBeTruthy()
   })
 
+  test('shoule be a Vue instance', () => {
+    wrapper.vm.setFilter('Drama');
+    expect(wrapper.vm.filter).toEqual('Drama');
+  })
+
   test('should sort the shows by rating', () => {
     const expectedResult = [
       { id: 4, rating: { average: 9.2 }, genres: ["Thriller"], premiered: '2013' },
@@ -50,8 +55,8 @@ describe('PopularShows.vue', () => {
     expect(wrapper.vm.filterShowsGenre(false)[1].genres.includes('Romance')).toBeTruthy;
   })
 
-  test('shoule emit a loading event', () => {
+  test('should emit a loading event', () => {
     wrapper.vm.getShowData();
     expect(wrapper.emitted().loading[0]).toBeTruthy;
-  })
+  })  
 })

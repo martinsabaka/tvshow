@@ -152,7 +152,7 @@ export default {
 
   &__group {
     display: initial;
-    
+
     &--sort-btn {
       margin-left: 2rem;
       width: 12rem;
