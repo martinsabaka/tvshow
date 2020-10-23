@@ -65,6 +65,7 @@ a {
   &--title {
     font-weight: bold;
     text-align: center;
+    max-width: 200px;
   }
 }
 </style>
