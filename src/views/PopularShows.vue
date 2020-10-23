@@ -17,10 +17,9 @@
             variant="outline-info"
             @click="filterShowsGenre(!sortByRating)"
             :class="{ sorted: sortByRating }"
-            >{{
-              sortByRating ? "Show random shows" : "Show best rated"
-            }}</b-button
           >
+            {{ sortByRating ? " Don't order" : "Order by rating" }}
+          </b-button>
         </b-button-group>
       </b-row>
     </div>
@@ -162,6 +161,12 @@ export default {
   @media (max-width: 768px) {
     &__group {
       display: inline-block;
+
+      &--sort-btn {
+        display: block;
+        width: 100%;
+        margin-left: 0 !important;
+      }
     }
   }
 }

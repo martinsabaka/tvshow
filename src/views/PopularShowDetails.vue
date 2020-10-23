@@ -16,7 +16,7 @@
               <b>Language: </b> {{ show.language }}<br />
               <b>Runtime: </b> {{ show.runtime }} minutes<br />
               <b>Status: </b> {{ show.status }}<br />
-              <b>Rating: </b> {{ show.rating.average }}<br />
+              <b>Average rating: </b> {{ show.rating.average }}<br />
               <a
                 v-if="show.externals.imdb"
                 :href="'https://www.imdb.com/title/' + show.externals.imdb"
@@ -110,6 +110,7 @@ export default {
 
   &__go-back {
     padding-top: 2rem;
+    padding-bottom: 2rem;
     text-align: center;
   }
 }
