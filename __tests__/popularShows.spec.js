@@ -46,6 +46,9 @@ describe('PopularShows.vue', () => {
   test('should filter shows by genre', () => {
     wrapper.vm.shows = testShowsData;
 
+    wrapper.vm.filter = "All"
+    expect(wrapper.vm.filterShowsGenre(false)).toEqual(testShowsData);
+
     wrapper.vm.filter = "Drama"
     expect(wrapper.vm.filterShowsGenre(false).length).toEqual(3);
 
