@@ -16,5 +16,10 @@ describe('PopularShowDetails.vue', () => {
 
   test('shoule be a Vue instance', () => {
     expect(wrapper).toBeTruthy()
+  });
+
+  test('shoule emit a loading event', () => {
+    wrapper.vm.getShowDetailsData();
+    expect(wrapper.emitted().loading[0]).toBeTruthy;
   })
 })

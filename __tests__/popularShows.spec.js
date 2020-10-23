@@ -49,4 +49,9 @@ describe('PopularShows.vue', () => {
     expect(wrapper.vm.filterShowsGenre(false)[0].genres.includes('Romance')).toBeTruthy;
     expect(wrapper.vm.filterShowsGenre(false)[1].genres.includes('Romance')).toBeTruthy;
   })
+
+  test('shoule emit a loading event', () => {
+    wrapper.vm.getShowData();
+    expect(wrapper.emitted().loading[0]).toBeTruthy;
+  })
 })

@@ -14,7 +14,7 @@ describe('Mounted App', () => {
     router
   });
 
-  it('is a Vue instance', () => {
+  test('should be a Vue instance', () => {
     expect(wrapper).toBeTruthy();
   })
 })
