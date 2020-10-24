@@ -13,22 +13,24 @@
             <i>{{ show.genres.toString() }}</i>
             <br />
             <div class="show__detail--details">
-              <b>Language: </b> {{ show.language }}<br />
-              <b>Runtime: </b> {{ show.runtime }} minutes<br />
-              <b>Status: </b> {{ show.status }}<br />
-              <b>Average rating: </b> {{ show.rating.average }}<br />
-              <a
-                v-if="show.externals.imdb"
-                :href="'https://www.imdb.com/title/' + show.externals.imdb"
-              >
-                <img
-                  class="show__detail--details--imdb-icon"
-                  src="@/assets/imdb-icon.jpg"
-                />
-              </a>
-              <a v-if="show.officialSite" :href="show.officialSite">
-                Official Site
-              </a>
+              <p>
+                <b>Language: </b> {{ show.language }}<br />
+                <b>Runtime: </b> {{ show.runtime }} minutes<br />
+                <b>Status: </b> {{ show.status }}<br />
+                <b>Average rating: </b> {{ show.rating.average }}<br />
+                <a
+                  v-if="show.externals.imdb"
+                  :href="'https://www.imdb.com/title/' + show.externals.imdb"
+                >
+                  <img
+                    class="show__detail--details--imdb-icon"
+                    src="@/assets/imdb-icon.jpg"
+                  />
+                </a>
+                <a v-if="show.officialSite" :href="show.officialSite">
+                  Official Site
+                </a>
+              </p>
               <p
                 class="show__detail--details--summary"
                 v-html="show.summary"
@@ -59,8 +61,6 @@ export default {
      * Fetches data about show
      */
     getShowDetailsData() {
-      this.$emit("loading", true);
-
       axios
         .get("http://api.tvmaze.com/shows/" + this.$route.params.id)
         .then(response => {

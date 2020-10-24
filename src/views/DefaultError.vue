@@ -2,7 +2,7 @@
   <div>
     <h1>Something went wrong!</h1>
 
-    <div class="show__go-back">
+    <div class="go-back">
       <b-button to="/" variant="info">Go to shows list</b-button>
     </div>
   </div>
@@ -14,4 +14,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.go-back {
+  padding-top: 2rem;
+}
+</style>

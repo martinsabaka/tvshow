@@ -8,13 +8,15 @@
         :src="show.image.medium"
       ></b-img>
       <div class="show-item__detail">
-        <b class="show-item__detail--title">{{ show.name }}</b>
-        {{ show.genres.toString() }}<br />
-        {{ show.premiered.substring(0, 4) }}<br />
-        {{ show.rating.average }}
+        <p>
+          <b class="show-item__detail--title">{{ show.name }}</b>
+          {{ show.genres.toString() }}<br />
+          {{ show.premiered.substring(0, 4) }}<br />
+          {{ show.rating.average }}
+        </p>
       </div>
       <div class="show-item--title">
-        {{ show.name }}
+        <p>{{ show.name }}</p>
       </div>
     </div>
   </router-link>

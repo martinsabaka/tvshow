@@ -21,10 +21,15 @@ const routes = [
     path: "/error",
     name: "DefaultError",
     component: DefaultError
+  },
+  {
+    path: "*",
+    redirect: "/error"
   }
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes
 });
 

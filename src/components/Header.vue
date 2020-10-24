@@ -40,8 +40,6 @@ export default {
      * Searches show based on shows name
      */
     searchShow(input) {
-      this.$emit("loading", true);
-
       axios
         .get("http://api.tvmaze.com/singlesearch/shows?q=" + input)
         .then(response => {
