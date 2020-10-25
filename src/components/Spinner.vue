@@ -22,7 +22,7 @@ export default {
   width: 100%;
   z-index: 10;
   background-color: black;
-  opacity: .7;
+  opacity: 0.7;
 
   &__spinner-ring {
     display: inline-block;

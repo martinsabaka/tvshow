@@ -94,7 +94,7 @@ describe("PopularShows.vue", () => {
   });
 
   test("should filter shows by genre", () => {
-    store.commit('setShows', testShowsData);
+    store.commit("setShows", testShowsData);
 
     wrapper.vm.filter = "All";
     expect(wrapper.vm.filterShowsGenre(false)).toEqual(testShowsData);
