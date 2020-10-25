@@ -8,7 +8,7 @@ User can also search for TV show based on show's name.
 Vue version `2.6.11`
 Vue CLI version `4.5.8`
 
-Jest Unit test are in `__tests__` folder.
+Unit tests are made using Jest.
 
 Namming conventions:
 Views/Components - CamelCase,

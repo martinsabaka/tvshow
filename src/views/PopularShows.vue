@@ -46,12 +46,6 @@ export default {
   },
   data() {
     return {
-      fields: [
-        { key: "name" },
-        { key: "genres" },
-        { key: "language" },
-        { key: "rating" }
-      ],
       genres: [
         "All",
         "Action",

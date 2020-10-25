@@ -1,8 +1,8 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import VueRouter from 'vue-router'
-import PopularShows from '../src/views/PopularShows.vue'
+import PopularShows from './PopularShows.vue'
 import BootstrapVue from 'bootstrap-vue'
-import router from '../src/router'
+import router from '../router'
 
 const localVue = createLocalVue()
 localVue.use(BootstrapVue)

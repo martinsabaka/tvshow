@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/detail/${show.id}`">
+  <router-link v-if="show" :to="`/detail/${show.id}`">
     <div class="show-item">
       <b-img
         v-if="show.image"
