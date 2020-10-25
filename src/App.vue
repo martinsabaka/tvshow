@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Spinner v-if="loading" />
+    <Spinner v-if="isLoading" />
     <Header />
     <b-container class="content" fluid>
       <router-view />
@@ -11,7 +11,7 @@
 <script>
 import Header from "./components/Header.vue";
 import Spinner from "./components/Spinner.vue";
-import Bus from "./eventBus";
+import { mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -19,16 +19,7 @@ export default {
     Header,
     Spinner
   },
-  data() {
-    return {
-      loading: false
-    };
-  },
-  updated() {
-    Bus.$on("toggleSpinner", isLoading => {
-      this.loading = isLoading;
-    });
-  }
+  computed: mapGetters(["isLoading"])
 };
 </script>
 

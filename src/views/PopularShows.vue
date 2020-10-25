@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapGetters, mapActions } from "vuex";
 import ShowDetail from "../components/ShowDetail";
 
 export default {
@@ -59,20 +59,12 @@ export default {
         "Thriller",
         "Western"
       ],
-      shows: [],
       filter: "All",
       sortByRating: false
     };
   },
   methods: {
-    /**
-     * Fetches data about shows
-     */
-    getShowData() {
-      axios.get("http://api.tvmaze.com/shows").then(response => {
-        this.shows = response.data;
-      });
-    },
+    ...mapActions(["fetchAllShows"]),
 
     /**
      * Sets currently used filter
@@ -89,11 +81,11 @@ export default {
       this.sortByRating = sortByRating;
 
       if (this.filter === "All") {
-        filteredShows = this.shows.filter(show => {
+        filteredShows = this.allShows.filter(show => {
           return show;
         });
       } else {
-        filteredShows = this.shows.filter(show => {
+        filteredShows = this.allShows.filter(show => {
           return show.genres.includes(this.filter);
         });
       }
@@ -112,8 +104,9 @@ export default {
       );
     }
   },
-  mounted() {
-    this.getShowData();
+  computed: mapGetters(["allShows"]),
+  created() {
+    this.fetchAllShows();
   }
 };
 </script>

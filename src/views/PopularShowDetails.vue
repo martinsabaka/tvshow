@@ -1,39 +1,50 @@
 <template>
   <div>
     <b-container fluid>
-      <b-row class="show" v-if="show.image">
+      <b-row class="show" v-if="showDetail.image">
         <b-col cols="12" md="5" xl="3">
-          <b-img class="show-image" rounded :src="show.image.original"></b-img>
+          <b-img
+            class="show-image"
+            rounded
+            :src="showDetail.image.original"
+          ></b-img>
         </b-col>
         <b-col cols="12" md="7" xl="3">
           <div class="show__detail">
             <h1>
-              <b>{{ show.name }}</b> ({{ show.premiered.substring(0, 4) }})
+              <b>{{ showDetail.name }}</b> ({{
+                showDetail.premiered.substring(0, 4)
+              }})
             </h1>
-            <i>{{ show.genres.toString() }}</i>
+            <i>{{ showDetail.genres.toString() }}</i>
             <br />
             <div class="show__detail--details">
               <p>
-                <b>Language: </b> {{ show.language }}<br />
-                <b>Runtime: </b> {{ show.runtime }} minutes<br />
-                <b>Status: </b> {{ show.status }}<br />
-                <b>Average rating: </b> {{ show.rating.average }}<br />
+                <b>Language: </b> {{ showDetail.language }}<br />
+                <b>Runtime: </b> {{ showDetail.runtime }} minutes<br />
+                <b>Status: </b> {{ showDetail.status }}<br />
+                <b>Average rating: </b> {{ showDetail.rating.average }}<br />
                 <a
-                  v-if="show.externals.imdb"
-                  :href="'https://www.imdb.com/title/' + show.externals.imdb"
+                  v-if="showDetail.externals.imdb"
+                  :href="
+                    'https://www.imdb.com/title/' + showDetail.externals.imdb
+                  "
                 >
                   <img
                     class="show__detail--details--imdb-icon"
                     src="@/assets/imdb-icon.jpg"
                   />
                 </a>
-                <a v-if="show.officialSite" :href="show.officialSite">
+                <a
+                  v-if="showDetail.officialSite"
+                  :href="showDetail.officialSite"
+                >
                   Official Site
                 </a>
               </p>
               <p
                 class="show__detail--details--summary"
-                v-html="show.summary"
+                v-html="showDetail.summary"
               ></p>
             </div>
           </div>
@@ -47,7 +58,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "PopularShowDetails",
@@ -57,23 +68,15 @@ export default {
     };
   },
   methods: {
-    /**
-     * Fetches data about show
-     */
-    getShowDetailsData() {
-      axios
-        .get("http://api.tvmaze.com/shows/" + this.$route.params.id)
-        .then(response => {
-          this.show = response.data;
-        });
-    }
+    ...mapActions(["fetchShowDetails"])
   },
-  mounted() {
-    this.getShowDetailsData();
+  computed: mapGetters(["showDetail"]),
+  created() {
+    this.fetchShowDetails(this.$route.params.id);
   },
   beforeRouteUpdate(to) {
     this.$route.params.id = to.params.id;
-    this.getShowDetailsData();
+    this.fetchShowDetails(this.$route.params.id);
   }
 };
 </script>

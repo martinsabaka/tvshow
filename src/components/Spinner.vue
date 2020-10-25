@@ -21,6 +21,8 @@ export default {
   height: 100%;
   width: 100%;
   z-index: 10;
+  background-color: black;
+  opacity: .7;
 
   &__spinner-ring {
     display: inline-block;
@@ -37,10 +39,10 @@ export default {
       width: 80px;
       height: 80px;
       margin: 8px;
-      border: 8px solid #343a40;
+      border: 8px solid white;
       border-radius: 50%;
       animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-      border-color: #343a40 transparent transparent transparent;
+      border-color: white transparent transparent transparent;
 
       &:nth-child(1) {
         animation-delay: -0.8s;
