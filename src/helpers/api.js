@@ -24,5 +24,6 @@ export async function searchShow(input) {
   const response = await axios.get(
     "http://api.tvmaze.com/singlesearch/shows?q=" + input
   );
+
   this.$router.push("/detail/" + response.data.id);
 }
