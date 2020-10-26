@@ -17,7 +17,8 @@ ShowDetail - used in PopularShows view to display sinle show with basic details 
 Spinner - generic loading spinner used while API call is in progress
 
 For Routing application uses Vue router.
-For API calls application uses Axios.
+For API calls application uses Axios. Functions using API are located in `helpers/api.js` file.
+Application uses interceptors for error handling. Interceptors are located in `helpers/interceptors.js` file.
 
 Application uses Vuex for handling API calls and state of loading. Vuex store is located in `store` folder.
 
