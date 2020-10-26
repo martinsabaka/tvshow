@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { searchShow } from "../helpers/api";
 
 export default {
   name: "Header",
@@ -36,16 +36,7 @@ export default {
     };
   },
   methods: {
-    /**
-     * Searches show based on shows name
-     */
-    searchShow(input) {
-      axios
-        .get("http://api.tvmaze.com/singlesearch/shows?q=" + input)
-        .then(response => {
-          this.$router.push("/detail/" + response.data.id);
-        });
-    }
+    searchShow: searchShow
   }
 };
 </script>

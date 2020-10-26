@@ -1,4 +1,7 @@
-import axios from "axios";
+import interceptor from "../../helpers/interceptors";
+import { fetchAllShows, fetchShowDetails } from "../../helpers/api";
+
+interceptor();
 
 const state = {
   isLoading: false,
@@ -14,28 +17,13 @@ const getters = {
 
 const actions = {
   /**
-   * Fetches all TV shows
-   */
-  async fetchAllShows({ commit }) {
-    const response = await axios.get("http://api.tvmaze.com/shows");
-
-    commit("setShows", response.data);
-  },
-
-  /**
-   * Fetches show detail
-   */
-  async fetchShowDetails({ commit }, id) {
-    const response = await axios.get("http://api.tvmaze.com/shows/" + id);
-    commit("setShowDetail", response.data);
-  },
-
-  /**
    * Toggles Loading Spinner
    */
   toggleSpinner({ commit }, isLoading) {
     commit("toggleSpinner", isLoading);
-  }
+  },
+  fetchAllShows,
+  fetchShowDetails
 };
 
 const mutations = {
